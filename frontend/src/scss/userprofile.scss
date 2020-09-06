@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+    font-family: "Do Hyeon", sans-serif;
+}
+
+.d-flex.v-card.v-card--flat.v-sheet.theme--light.rounded-0 {
+    margin: 5px;
+}
+.d-flex.child-flex.col.col-4 {
+    padding: 0px;
+}
+.v-image.v-responsive.grey.lighten-2.theme--light {
+    width: 180px;
+    height: 180px;
+    border: 2px solid #e1e1e1;
+}
+.user-info-thead.tr.th {
+    font-size: 30px;
+}
+@media screen and (max-width: 640px) {
+    .v-image.v-responsive.grey.lighten-2.theme--light {
+        width: 130px;
+        height: 130px;
+    }
+    @media screen and (max-width: 500px) {
+        .v-image.v-responsive.grey.lighten-2.theme--light {
+            width: 110px;
+            height: 110px;
+        }
+    }
+    @media screen and (max-width: 300px) {
+        .v-image.v-responsive.grey.lighten-2.theme--light {
+            width: 90px;
+            height: 90px;
+        }
+    }
+}
+
+.theme--light.v-data-table .v-data-footer {
+    border: none;
+    opacity: 0;
+}
+.v-toolbar__content {
+    height: 0px;
+}

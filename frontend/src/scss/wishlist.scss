@@ -1,0 +1,36 @@
+#wishlist {
+    margin-top: 10px;
+    .v-icon.notranslate.mdi.mdi-heart.theme--light {
+        font-size: large;
+    }
+
+    @media screen and (max-width: 640px) {
+        .v-icon.notranslate.mdi.mdi-heart.theme--light {
+            font-size: small;
+        }
+    }
+}
+
+// .wish-pic {
+//     width: 180px;
+//     height: 180px;
+//     border: 2px solid #e1e1e1;
+// }
+// @media screen and (max-width: 640px) {
+//     .wish-pic {
+//         width: 130px;
+//         height: 130px;
+//     }
+//     @media screen and (max-width: 500px) {
+//         .wish-pic {
+//             width: 110px;
+//             height: 110px;
+//         }
+//     }
+//     @media screen and (max-width: 300px) {
+//         .wish-pic {
+//             width: 90px;
+//             height: 90px;
+//         }
+//     }
+// }

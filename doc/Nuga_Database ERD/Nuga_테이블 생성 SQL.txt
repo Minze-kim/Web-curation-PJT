@@ -1,0 +1,145 @@
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- user Table Create SQL
+CREATE TABLE user
+(
+    `user_id`   INT            NOT NULL    AUTO_INCREMENT, 
+    `email`     VARCHAR(45)    NULL, 
+    `password`  VARCHAR(45)    NULL, 
+    `nickname`  VARCHAR(45)    NULL, 
+    `coin`      INT            NULL, 
+    `rank`      DOUBLE         NULL, 
+    PRIMARY KEY (user_id)
+);
+
+
+-- user Table Create SQL
+CREATE TABLE category
+(
+    `category_id`    INT            NOT NULL    AUTO_INCREMENT, 
+    `category_name`  VARCHAR(45)    NULL, 
+    PRIMARY KEY (category_id)
+);
+
+
+-- user Table Create SQL
+CREATE TABLE article
+(
+    `article_id`       INT            NOT NULL    AUTO_INCREMENT, 
+    `price`            INT            NULL, 
+    `title`            VARCHAR(45)    NULL, 
+    `seller`           INT            NULL, 
+    `min_unit`         INT            NULL, 
+    `purchase_date`    DATETIME       NULL, 
+    `state`            INT            NULL, 
+    `description`      TEXT           NULL, 
+    `expire_date`      DATETIME       NULL, 
+    `category_id`      INT            NULL, 
+    `created_date`     DATETIME       NULL, 
+    `immediate_price`  INT            NULL, 
+    `buyer`            INT            NULL, 
+    PRIMARY KEY (article_id)
+);
+
+ALTER TABLE article
+    ADD CONSTRAINT FK_article_category_id_category_category_id FOREIGN KEY (category_id)
+        REFERENCES category (category_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE article
+    ADD CONSTRAINT FK_article_seller_user_user_id FOREIGN KEY (seller)
+        REFERENCES user (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE article
+    ADD CONSTRAINT FK_article_buyer_user_user_id FOREIGN KEY (buyer)
+        REFERENCES user (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- user Table Create SQL
+CREATE TABLE tag
+(
+    `tag_id`    INT            NULL        AUTO_INCREMENT, 
+    `tag_name`  VARCHAR(45)    NULL   
+);
+
+
+-- user Table Create SQL
+CREATE TABLE image
+(
+    `article_id`  INT    NOT NULL    AUTO_INCREMENT, 
+    PRIMARY KEY (article_id)
+);
+
+ALTER TABLE image
+    ADD CONSTRAINT FK_image_article_id_article_article_id FOREIGN KEY (article_id)
+        REFERENCES article (article_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- user Table Create SQL
+CREATE TABLE article_tag
+(
+    `article_id`  INT    NOT NULL    AUTO_INCREMENT, 
+    `tag_id`      INT    NULL, 
+    PRIMARY KEY (article_id)
+);
+
+ALTER TABLE article_tag
+    ADD CONSTRAINT FK_article_tag_article_id_article_article_id FOREIGN KEY (article_id)
+        REFERENCES article (article_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE article_tag
+    ADD CONSTRAINT FK_article_tag_tag_id_tag_tag_id FOREIGN KEY (tag_id)
+        REFERENCES tag (tag_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- user Table Create SQL
+CREATE TABLE user_follower
+(
+    `followed_id`   INT    NULL, 
+    `following_id`  INT    NULL   
+);
+
+ALTER TABLE user_follower
+    ADD CONSTRAINT FK_user_follower_followed_id_user_user_id FOREIGN KEY (followed_id)
+        REFERENCES user (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE user_follower
+    ADD CONSTRAINT FK_user_follower_following_id_user_user_id FOREIGN KEY (following_id)
+        REFERENCES user (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- user Table Create SQL
+CREATE TABLE wish
+(
+    `article_id`  INT    NOT NULL    AUTO_INCREMENT, 
+    `user_id`     INT    NULL, 
+    PRIMARY KEY (article_id)
+);
+
+ALTER TABLE wish
+    ADD CONSTRAINT FK_wish_article_id_article_article_id FOREIGN KEY (article_id)
+        REFERENCES article (article_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE wish
+    ADD CONSTRAINT FK_wish_user_id_user_user_id FOREIGN KEY (user_id)
+        REFERENCES user (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- user Table Create SQL
+CREATE TABLE alarm
+(
+    `alarm_id`    INT        NOT NULL    AUTO_INCREMENT, 
+    `article_id`  INT        NULL, 
+    `user_id`     INT        NULL, 
+    `state`       TINYINT    NULL, 
+    PRIMARY KEY (alarm_id)
+);
+
+ALTER TABLE alarm
+    ADD CONSTRAINT FK_alarm_user_id_user_user_id FOREIGN KEY (user_id)
+        REFERENCES user (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE alarm
+    ADD CONSTRAINT FK_alarm_article_id_article_article_id FOREIGN KEY (article_id)
+        REFERENCES article (article_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
